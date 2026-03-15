@@ -11,37 +11,32 @@
 
 
 
+
+
 <style>
 body{
 margin:0;
 font-family:'Allura',cursive;
-color:rgb(173,132,70);
-}
+color:rgb(173,132,70);}
 .section{
 height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-text-align:center;
-}
+text-align:center;}
 .first{
 background:url("mood2.jpg") center/cover no-repeat;
 }
 .second{
-background:url("mood4.jpg") center/cover no-repeat;
-}
+background:url("mood4.jpg") center/cover no-repeat;}
 .box{
-max-width:700px;
-}
+max-width:700px;}
 h1{
-font-size:140px;
-margin:0;
-}
+font-size:140px;margin:0;}
 p{
 font-size:42px;
-margin-top:10px;
-}
+margin-top:10px;}
 a{
 display:inline-block;
 margin-top:25px;
@@ -49,31 +44,28 @@ padding:10px 40px;
 font-size:30px;
 text-decoration:none;
 color:rgb(173,132,70);
-border:3px solid rgb(173,132,70);
-}
+border:3px solid rgb(173,132,70);}
 a:hover{
-background:rgba(173,132,70,0.2);
-}
+background:rgba(173,132,70,0.2);}
 .photo-frame{
-width:700px;
-height:450px;
+width:450px;
+height:300px;
 border:12px solid rgb(173,132,70);
 box-shadow:0 0 25px rgba(0,0,0,0.6);
 overflow:hidden;
 display:flex;
 justify-content:center;
-align-items:center;}
+align-items:center;
+margin:auto;}
 .photo-frame img{
 width:100%;
 height:100%;
 object-fit:cover;
-}
-.bigphoto{
-max-width:80%;
-max-height:70vh;
-border:12px solid rgb(173,132,70);
-box-shadow:0 0 25px rgba(0,0,0,0.6);
-}
+transition: opacity 0.6s ease;}
+.message{
+font-size:36px;
+margin-top:20px;
+max-width:800px;}
 button{
 margin-top:30px;
 padding:10px 40px;
@@ -82,36 +74,40 @@ font-family:'Allura',cursive;
 color:rgb(173,132,70);
 background:transparent;
 border:3px solid rgb(173,132,70);
-cursor:pointer;
-}
+cursor:pointer;}
 button:hover{
 background:rgba(173,132,70,0.2);
 }
-
 </style>
 </head>
+
+
+
+
+
 
 <body>
 <section class="section first">
 <div class="box">
 <h1>Take a Break</h1>
-<p>
-Pause for a moment.<br>
-Breathe. Relax. Let your mind rest.
-</p>
-<a href="how.html">Back</a>
-</div>
-
-
-
-
+<p>Pause for a moment.<br>
+Breathe. Relax. Let your mind rest.</p>
+<a href="how.html">Back</a></div>
 </section>
-<section class="section second">
-<div class="photo-frame">
-<img src="ph1.jpg" id="photo">
-</div>
+
+
+
+
+
+
+<section class="section second"><div class="photo-frame">
+<img src="ph1.jpg" id="photo"></div>
+<p class="message" id="message">
+Feeling under the weather today? Let’s take a moment to chill.
+</p>
 <button onclick="nextPhoto()">Next</button>
 </section>
+
 
 
 
@@ -123,17 +119,34 @@ let photos = [
 "ph3.jpg",
 "ph4.jpg",
 "ph5.jpg",
-"ph6.jpg"
-];
+"ph6.jpg"];
+let messages = [
+"Feeling under the weather today? Let’s take a moment to chill.",
+"Not a dog person? No worries—click next.",
+"Not even a cat person? Huh… no worries—click next.",
+"I think you must be melting by now.",
+"Why don’t we take a short break and analyze the world around us?",
+"Everyone has their own pace in life… and that’s completely fine. Just enjoy life."];
 let index = 0;
 function nextPhoto(){
+let photo = document.getElementById("photo");
+photo.style.opacity = 0;
+setTimeout(function(){
 index++;
 if(index >= photos.length){
 index = 0;
 }
-document.getElementById("photo").src = photos[index];
+photo.src = photos[index];
+document.getElementById("message").innerText = messages[index];
+photo.style.opacity = 1;
+},300);
 }
 </script>
+
+
+
+
+
 
 
 </body>
