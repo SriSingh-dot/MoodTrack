@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>MoodIt</title>
+<title>MoodTrack</title>
 <link rel="icon" type="image/png" href="mood3.png">
 <link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
 
 
 
@@ -20,20 +21,106 @@ align-items:center;
 background:url("mood2.jpg") center/cover no-repeat;
 font-family:'Allura',cursive;
 color:rgb(173,132,70);
-}</style>
+}
+.box{
+text-align:center;
+}
+h1{
+font-size:120px;
+margin-bottom:60px;
+position:relative;
+display:inline-block;
+}
+h1::before{
+content:"";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+bottom:-12px;
+width:320px;
+height:2px;
+background:rgb(173,132,70);
+}
+h1::after{
+content:"";
+position:absolute;
+left:50%;
+transform:translateX(-50%);
+bottom:-20px;
+width:220px;
+height:2px;
+background:rgb(173,132,70);
+}
+table{
+font-size:36px;
+border-spacing:30px 20px;
+}
+td{
+padding:10px 20px;
+}
+.snow{
+position:fixed;
+top:-10px;
+width:8px;
+height:8px;
+background:rgb(173,132,70);
+border-radius:50%;
+pointer-events:none;
+animation:fall linear infinite;
+}
+@keyframes fall{
+to{
+transform:translateY(110vh);
+}
+} 
+a{
+text-decoration:none;
+color:rgb(173,132,70);
+border:2px solid rgb(173,132,70);
+padding:6px 20px;
+}
+a:hover{
+background:rgba(173,132,70,0.2);
+}
+</style>
 </head>
 <body>
-<div class="box"><h1>MoodIt</h1>
-<table><tr>
+<div class="box">
+<h1>MoodTrack</h1>
+<table>
+<tr>
 <td>Want to take a break?</td>
-<td><a href="break.html">Enter</a></td></tr><tr>
+<td><a href="break.html">Enter</a></td>
+</tr>
+<tr>
 <td>Mood Track</td>
-<td><a href="mood.html">Enter</a></td></tr><tr>
-<td>Want to save your day event?</td>
+<td><a href="mood.html">Enter</a></td>
+</tr>
+<tr>
+<td>Want to save an event of the day?</td>
 <td><a href="event.html">Enter</a></td>
 </tr>
 </table>
 </div>
+
+
+
+
+
+<script>
+for(let i=0;i<40;i++){
+let snow=document.createElement("div");
+snow.className="snow";
+snow.style.left=Math.random()*100+"vw";
+snow.style.animationDuration=5+Math.random()*8+"s";
+snow.style.opacity=Math.random();
+snow.style.transform="scale("+(0.4+Math.random())+")";
+document.body.appendChild(snow);
+}
+</script>
+
+
+
 
 
 
