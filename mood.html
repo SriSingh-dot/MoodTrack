@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mood Calendar</title><link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
-
-
+<link rel="icon" type="image/png" href="mood3.png">
 
 
 
@@ -81,6 +80,18 @@ to{
 transform:translateY(110vh);
 }
 } 
+.back{
+margin:8px;
+padding:10px 25px;
+font-family:'Allura',cursive;
+font-size:26px;
+border:3px solid rgb(173,132,70);
+background:transparent;
+color:rgb(173,132,70);
+cursor:pointer;
+transition:0.3s;}
+.back:hover{
+box-shadow:0 0 15px rgb(173,132,70);}
 .day{
 height:110px;
 border:4px solid rgb(173,132,70);
@@ -122,6 +133,7 @@ border:3px solid rgb(133,95,40);
 <button onclick="setMood('#5cd65c')">Calm</button>
 <button onclick="setMood('#b366ff')">Sad</button>
 <button onclick="setMood('#999999')">Tired</button></div>
+<button class="back" onclick="window.location.href='how.html'">Back</button>
 
 
 
@@ -174,13 +186,23 @@ let monthNames=[
 
 document.getElementById("monthName").innerText =
 monthNames[month]+" "+year;
-let days=new Date(year,month+1,0).getDate();let moodData=JSON.parse(localStorage.getItem("moods")) || {};let selectedMood="";
+let days=new Date(year,month+1,0).getDate();let storageKey="moods-"+year+"-"+month;
+let moodData=JSON.parse(localStorage.getItem(storageKey)) || {};let selectedMood="";
 function setMood(color){
 selectedMood=color;}
-function updateStats(){let count={};
+function updateStats(){let count={
+"#ff4d4d":0,
+"#4da6ff":0,
+"#5cd65c":0,
+"#b366ff":0,
+"#999999":0
+}
 for(let day in moodData){
 let color=moodData[day];if(!count[color]) count[color]=0;count[color]++;}
-let text="<b>Mood Statistics</b><br><br>";for(let c in count){text+=`<span style="color:${c}">■</span> ${count[c]} days<br>`;}
+let text="<b>Mood Statistics</b><br><br>";
+for(let c in count){
+text += '<span style="color:'+c+'">■</span> ' + count[c] + ' days<br>';
+}
 statsBox.innerHTML=text;}
 for(let i=1;i<=days;i++){
 let box=document.createElement("div");
@@ -192,7 +214,7 @@ box.onclick=function(){
 if(!selectedMood) return;
 box.style.background=selectedMood;
 moodData[i]=selectedMood;
-localStorage.setItem("moods",JSON.stringify(moodData));
+localStorage.setItem(storageKey,JSON.stringify(moodData));
 updateStats();};
 calendar.appendChild(box);}
 updateStats();

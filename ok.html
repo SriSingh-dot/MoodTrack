@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saved Events</title><link rel="icon" type="image/png" href="mood3.png">
+<link href="https://fonts.googleapis.com/css2?family=Allura&display=swap" rel="stylesheet">
+
+
+
+
+
+
+
+
+
+<style>
+body{
+margin:0;
+font-family:'Allura',cursive;
+background:url("mood2.jpg") center/cover no-repeat fixed;
+color:rgb(173,132,70);
+text-align:center;}
+h1{
+font-size:80px;
+margin-top:40px;}
+.timeline{
+margin-top:40px;}
+.back{
+margin:8px;
+padding:10px 25px;
+font-family:'Allura',cursive;
+font-size:26px;
+border:3px solid rgb(173,132,70);
+background:transparent;
+color:rgb(173,132,70);
+cursor:pointer;
+transition:0.3s;}
+.back:hover{
+box-shadow:0 0 15px rgb(173,132,70);}
+.snow{
+position:fixed;
+top:-10px;
+width:8px;
+height:8px;
+background:rgb(173,132,70);
+border-radius:50%;
+pointer-events:none;
+animation:fall linear infinite;
+}
+@keyframes fall{
+to{
+transform:translateY(110vh);}} 
+.event{
+border:3px solid rgb(173,132,70);
+padding:15px;
+margin:20px auto;
+max-width:600px;
+background:rgba(0,0,0,0.4);
+}
+.date{
+font-size:24px;}
+.title{
+font-size:32px;}
+.desc{
+font-size:24px;}
+.mood-box{
+width:20px;
+height:20px;
+display:inline-block;
+margin-left:8px;
+border:2px solid rgb(173,132,70);}</style>
+
+
+
+
+
+
+
+
+
+
+
+
+</head><body>
+<h1>Your Saved Events</h1>
+<button class="back" onclick="window.location.href='how.html'">Back</button>
+<div class="timeline" id="timeline"></div>
+
+
+
+
+
+
+
+<script>
+let events = JSON.parse(localStorage.getItem("events")) || [];function displayEvents(){
+let timeline=document.getElementById("timeline");
+timeline.innerHTML="";
+events.slice().reverse().forEach(e=>{let div=document.createElement("div");
+div.className="event";div.innerHTML=
+
+
+
+
+
+`
+<div class="date">${e.date}</div>
+<div class="title">${e.title}</div>
+<div class="desc">${e.desc}</div>
+Mood <span class="mood-box" style="background:${e.mood}"></span>
+`;
+
+
+
+
+
+for(let i=0;i<40;i++){
+let snow=document.createElement("div");
+snow.className="snow";
+snow.style.left=Math.random()*100+"vw";
+snow.style.animationDuration=5+Math.random()*8+"s";
+snow.style.opacity=Math.random();
+snow.style.transform="scale("+(0.4+Math.random())+")";
+document.body.appendChild(snow);
+}
+
+
+
+timeline.appendChild(div);});}
+displayEvents();
+</script>
+
+
+
+
+
+
+</body>
+</html>
